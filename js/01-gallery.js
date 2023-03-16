@@ -35,12 +35,14 @@ const handleGalleryContainerClick = (event) => {
 	);
 	instance.show();
 
+	const handleModalClosing = (event) => {
+		if (event.key === "Escape") {
+			instance.close();
+			event.currentTarget.removeEventListener("keydown", handleModalClosing);
+		}
+	};
 	if (instance.visible()) {
-		event.currentTarget.addEventListener("keydown", (event) => {
-			if (event.key === "Escape") {
-				instance.close();
-			}
-		});
+		event.currentTarget.addEventListener("keydown", handleModalClosing);
 	}
 };
 
